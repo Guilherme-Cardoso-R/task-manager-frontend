@@ -1,0 +1,21 @@
+<table>
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Descrição</th>
+        <th>Status</th>
+        <th>Responsável</th>
+        <th>Data Prazo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarefa of tarefas">
+        <td>{{ tarefa.titulo }}</td>
+        <td>{{ tarefa.descricao }}</td>
+        <td>{{ tarefa.status }}</td>
+        <td>{{ tarefa.responsavel }}</td>
+        <td>{{ tarefa.dataPrazo | date }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
