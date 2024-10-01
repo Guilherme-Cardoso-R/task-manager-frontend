@@ -1,21 +1,53 @@
+<h2>Lista de Tarefas</h2>
+
+<!-- Filtros -->
+<div>
+  <label>Status:</label>
+  <select [(ngModel)]="filtro.status" (change)="applyFilter()">
+    <option value="">Todos</option>
+    <option value="pendente">Pendente</option>
+    <option value="em andamento">Em Andamento</option>
+    <option value="concluida">Concluída</option>
+  </select>
+
+  <label>Prioridade:</label>
+  <select [(ngModel)]="filtro.prioridade" (change)="applyFilter()">
+    <option value="">Todas</option>
+    <option value="alta">Alta</option>
+    <option value="media">Média</option>
+    <option value="baixa">Baixa</option>
+  </select>
+</div>
+
+<!-- Lista de Tarefas -->
 <table>
-    <thead>
-      <tr>
-        <th>Título</th>
-        <th>Descrição</th>
-        <th>Status</th>
-        <th>Responsável</th>
-        <th>Data Prazo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let tarefa of tarefas">
-        <td>{{ tarefa.titulo }}</td>
-        <td>{{ tarefa.descricao }}</td>
-        <td>{{ tarefa.status }}</td>
-        <td>{{ tarefa.responsavel }}</td>
-        <td>{{ tarefa.dataPrazo | date }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Descrição</th>
+      <th>Status</th>
+      <th>Prioridade</th>
+      <th>Responsável</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tarefa of tarefas">
+      <td>{{ tarefa.titulo }}</td>
+      <td>{{ tarefa.descricao }}</td>
+      <td>{{ tarefa.status }}</td>
+      <td>{{ tarefa.prioridade }}</td>
+      <td>{{ tarefa.responsavel }}</td>
+      <td>
+        <button (click)="deleteTarefa(tarefa.id)">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Paginação -->
+<div>
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+  <span>Página {{ currentPage }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage * pageSize >= totalTarefas">Próximo</button>
+</div>
